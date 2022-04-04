@@ -1,15 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/AppRouter';
+import { Layout } from 'antd';
+import Navbar from './components/Login/Navbar';
 
-function App() {
+const App: FC = () => {
 	return (
 		<BrowserRouter>
-			<div className="App">
-				<AppRouter/>
-			</div>
+			<Layout>
+				<Navbar/>
+				<Layout.Content>
+					<AppRouter/>
+				</Layout.Content>
+			</Layout>
 		</BrowserRouter>
 	);
 }
