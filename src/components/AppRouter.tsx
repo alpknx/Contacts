@@ -1,11 +1,12 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { privateRoutes, publicRoutes, RouteNames } from './router/routing'
+import { useTypesSelector } from './hooks/useTypesSelector';
+import { privateRoutes, publicRoutes} from './router/routing'
 
 const AppRouter = () => {
-	const auth = false;
+	const {isAuth} = useTypesSelector(state => state.auth);
 	return (
-		auth? 
+		isAuth? 
 			<Routes>
 				{privateRoutes.map(route => {
 					return <Route key={route.path} path={route.path} element={<route.element/>} />
@@ -19,9 +20,6 @@ const AppRouter = () => {
 				})}
 				<Route path={'/'} element={<Navigate replace to="/login" />} />
 			</Routes>
-		
-	
-
 	)
 }
 
