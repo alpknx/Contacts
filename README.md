@@ -8,6 +8,8 @@ npm install
 
 ```
 npm start
+login: user
+password: 123
 ```
 
 # Login page + Contacts(Typescript + React + Redx + Ant Design)
