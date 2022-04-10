@@ -12,7 +12,7 @@ login: user
 password: 123
 ```
 
-# Login page + Contacts(Typescript + React + Redx + Ant Design)
+# Login page + Contacts(Typescript + React + Redux + Ant Design)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
