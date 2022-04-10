@@ -11,6 +11,12 @@ npm start
 login: user
 password: 123
 ```
+Итоговый результат:
+```
+git checkout feature/set-contacts
+или
+git checkout main
+```
 
 # Login page + Contacts(Typescript + React + Redux + Ant Design)
 
