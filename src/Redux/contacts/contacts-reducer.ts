@@ -1,19 +1,60 @@
-//Создаём редьюсер, принимающий на вход текущий стейт и объект Action с полями type и payload, тип возвращаемого редьюсером значения - State
-import { State, Action, ActionType } from "../../components/Contacts/stateType";
+import {ContactActionEnum, ContactsAction, ContactsState } from "./contacts-types";
 
-export const contactReducer:  React.Reducer<State, Action> = (state, action):State=> {
-	switch (action.type) {
-		case ActionType.ADD: {
-			return {...state, contacts: [...state.contacts, {
-						name: action.name,
-					}]}
-		}
-		case ActionType.CHANGE: {
-			return {...state, newName: action.name}
-		}
-		case ActionType.REMOVE: {
-			return {...state, contacts:  [...state.contacts.filter(name => name !== action.payload)]}
-		}
-		default: throw new Error('Unexpected action');
+const initialState: ContactsState = {
+	contacts: [
+		{
+			id: 1,
+			contactName: 'Alexey',
+			number: '91384378302'
+		},
+		{
+			id: 2,
+			contactName: 'Dima',
+			number: '913843742'
+		},
+	],
+	contact: {
+		id: 0 ,
+		contactName: '',
+		number:''
 	}
-};
+}
+
+export default function ContactsReducer(state = initialState, action:ContactsAction): ContactsState{
+	switch (action.type) {
+		case ContactActionEnum.ADD_CONTACT: {
+			let newContact = {
+				id: 3, contactName: action.contactName, number: action.number
+			}
+			return {...state,
+					 contacts: [...state.contacts, newContact],		
+					}
+		}
+		case ContactActionEnum.SET_CONTACTS: {
+			return {...state, contacts: [...action.payload]}
+		}
+		case ContactActionEnum.CHANGE_CONTACT: {
+			return{...state, 
+				contacts: [...state.contacts.map( contact => {
+					if(contact.id !== action.id) {
+						return contact
+					}
+					return {
+						...contact,
+						contactName: action.contactName,
+						number: action.number
+					}
+
+					}) 
+				]
+			}
+		}
+		
+		case ContactActionEnum.DELETE_CONTACT: {
+			return {...state, contacts: [...state.contacts.filter(contactName => contactName !== action.payload)]}
+		}
+		
+		default:
+			return state;
+	}
+}
