@@ -10,3 +10,9 @@
 .h100 {
 	height: calc(100vh - 64px); 
 }
+
+.contacts-item {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	justify-items: center;
+}
