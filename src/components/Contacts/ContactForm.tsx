@@ -1,18 +1,23 @@
 import { Button, Form, Input } from 'antd'
 import React, { FC, useState } from 'react'
 import { ContactsActionCreators } from '../../Redux/contacts/action-creators'
+import { useActions } from '../hooks/useActions'
 import { IContact } from '../models/IContact'
 import { rules } from '../utils/utils'
 
 
 const ContactForm: FC = () => {
 	
-
 	const [contactName, setContactName] = useState('')
    const [number, setNumber] = useState('')
+	const {addContact} = useActions()
+	const submit = () => {
+		addContact({contactName, number})
 
+	}
+	
 	return (
-		<Form>
+		<Form onFinish={submit}>
 			<Form.Item
 			label="Contact name"
 			name="contact name"

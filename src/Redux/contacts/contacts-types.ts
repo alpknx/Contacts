@@ -1,40 +1,33 @@
-import { Dispatch } from 'react';
-import { Action } from 'redux';
 import {IContact} from '../../components/models/IContact'
 
-export type Contacts = IContact[];
 
 export interface ContactsState {
-	contacts: Contacts;
+	contacts: IContact[];
 }
 
 export enum ContactActionEnum {
 	ADD_CONTACT = "ADD_CONTANCT",
+	SET_CONTACTS = "SET_CONTACTS",
 	CHANGE_CONTACT = "CHANGE_CONTANCT",
 	DELETE_CONTACT = "DELETE_CONTANCT",
 }
 
-type ActionStringPayload = {
-   type: ContactActionEnum.ADD_CONTACT | ContactActionEnum.CHANGE_CONTACT,
-	name: string,
+export interface AddContactAction {
+	type: ContactActionEnum.ADD_CONTACT;
+	contactName: string,
 	number: string
 
 }
-
-type ActionObjectPayload = {
-   type: ContactActionEnum.DELETE_CONTACT,
-   payload: IContact;
-}
-
-export interface AddContactAction {
-	type: ContactActionEnum.ADD_CONTACT;
-	payload: IContact;
+export interface setContactAction {
+	type: ContactActionEnum.SET_CONTACTS;
+	payload: IContact[]
 }
 
 export interface ChangeContactAction {
 	type:ContactActionEnum.CHANGE_CONTACT;
-	payload: IContact;
+	payload: IContact
 }
+
 export interface DeleteContactAction {
 	type: ContactActionEnum.DELETE_CONTACT
 	payload: IContact;
@@ -42,6 +35,8 @@ export interface DeleteContactAction {
 }
 
 export type ContactsAction =
-	ActionStringPayload |
-	ActionObjectPayload 
+	AddContactAction |
+	setContactAction |
+	ChangeContactAction |
+	DeleteContactAction
 	

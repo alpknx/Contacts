@@ -1,15 +1,18 @@
 import { Button, Layout, Modal, Row } from 'antd';
 import React, { FC, useState } from 'react'
+import { useTypesSelector } from '../hooks/useTypesSelector';
+import { IContact } from '../models/IContact';
 import ContactForm from './ContactForm';
 import ContactsList from './ContactsList';
 
-const Contacts: FC = () => {
+const ContactsPage: FC = () => {
 
 	const [modalVisible, setModalVisible] = useState(false)
+	const contacts = useTypesSelector(state => state.contacts.contacts);
 
 	return (
 		<Layout>
-			<ContactsList contacts={[]}/>
+			<ContactsList contacts={contacts}/>
 			<Row justify='center'>
 				<Button onClick={()=> setModalVisible(true)}>
 					Add Contact
@@ -23,4 +26,4 @@ const Contacts: FC = () => {
 	)
 }
 
-export default Contacts;
+export default ContactsPage;
