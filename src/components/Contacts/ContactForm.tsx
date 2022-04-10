@@ -6,7 +6,6 @@ import { rules } from '../utils/utils'
 
 
 const ContactForm: FC = () => {
-	
 	const [contactName, setContactName] = useState('')
    const [number, setNumber] = useState('')
 	const [id, setId] = useState(0)
@@ -15,7 +14,6 @@ const ContactForm: FC = () => {
 		addContact({id,contactName, number})
 
 	}
-	
 	return (
 		<Form onFinish={submit}>
 			<Form.Item

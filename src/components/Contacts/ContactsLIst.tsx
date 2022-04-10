@@ -5,16 +5,33 @@ import { useActions } from '../hooks/useActions';
 import '../../App.css'
 import ChangeForm from './ChangeForm';
 import { IContact } from '../models/IContact';
+import React from 'react';
 
 const ContactsList: FC<ContactsState> = (props) => {
-
-	const [modalVisible, setModalVisible] = useState(false)
 	const [contact, setContact] = useState<IContact>({
 		id: 0,
 		contactName: '',
 		number: ''
 	} as IContact);
+
 	const {deleteContact} = useActions()
+
+	const [visible, setVisible] = React.useState(false);
+  	const [confirmLoading, setConfirmLoading] = React.useState(false);
+
+ 	 const showModal = () => {
+    setVisible(true);
+  };
+
+  	const handleOk = () => {
+    setConfirmLoading(true);
+	 setVisible(false);
+	 setConfirmLoading(false);
+  	};
+
+  	const handleCancel = () => {
+    setVisible(false);
+  	};
 	
 	return (
 		<List
@@ -27,10 +44,13 @@ const ContactsList: FC<ContactsState> = (props) => {
 						title={<a href="https://ant.design">{item.contactName}</a>}/>
 					<List.Item.Meta
 						title={<a href="https://ant.design">{item.number}</a>}/>
-					<Button onClick={()=> setModalVisible(true)}>
+					<Button type="primary" onClick={showModal}>
 						Change Contact
 					</Button>
-					<Modal title="change Contact" visible={modalVisible} footer={null} onCancel={()=> setModalVisible(false)}>
+					<Modal title="change Contact" visible={visible} 
+							onOk={handleOk}
+							confirmLoading={confirmLoading}
+							onCancel={handleCancel}>
 						<ChangeForm contact={item} contacts={props.contacts}/>
 					</Modal>
 					<Button onClick={()=> deleteContact(item)}>
