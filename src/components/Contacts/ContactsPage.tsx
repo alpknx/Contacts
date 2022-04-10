@@ -8,7 +8,7 @@ import ContactsList from './ContactsList';
 const ContactsPage: FC = () => {
 	const contacts = useTypesSelector(state => state.contacts.contacts);
 	const contact = useTypesSelector(state => state.contacts.contact);
-	const [searchQuery, setSearchQuery] = useState('');
+	//const [searchQuery, setSearchQuery] = useState('');
 
 	const [visible, setVisible] = React.useState(false);
   	const [confirmLoading, setConfirmLoading] = React.useState(false);
@@ -29,15 +29,16 @@ const ContactsPage: FC = () => {
     setVisible(false);
   	};
 
+
 	return (
 		<Layout>
-			<Form>
+			{/* <Form>
 			<Form.Item>
 			<Input value={searchQuery} placeholder="Search..."
                   onChange={e => setSearchQuery(e.target.value)} />
 			</Form.Item>
-			</Form>
-			<ContactsList contacts={contacts} contact={contact}/>
+			</Form> */}
+			<ContactsList contacts={contacts} contact={contact} />
 			<Row justify='center'>
 				<Button type="primary" onClick={showModal}>
 					Add Contact
