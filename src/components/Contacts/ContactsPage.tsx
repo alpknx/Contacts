@@ -19,8 +19,10 @@ const ContactsPage: FC = () => {
 
   	const handleOk = () => {
     setConfirmLoading(true);
-    setVisible(false);
-    setConfirmLoading(false);
+    setTimeout(() => {
+      setVisible(false);
+      setConfirmLoading(false);
+    }, 500);
   	};
 
   	const handleCancel = () => {
