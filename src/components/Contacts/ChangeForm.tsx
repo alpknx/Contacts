@@ -1,18 +1,18 @@
 import { Button, Form, Input } from 'antd'
 import { FC, useState } from 'react'
+import { ContactsState } from '../../Redux/contacts/contacts-types'
 import { useActions } from '../hooks/useActions'
-import { IContact } from '../models/IContact'
 import { rules } from '../utils/utils'
 
 
-const ContactForm: FC = () => {
+const ChangeForm: FC<ContactsState> = (props) => {
 	
-	const [contactName, setContactName] = useState('')
-   const [number, setNumber] = useState('')
-	const [id, setId] = useState(0)
-	const {addContact} = useActions()
+	const [contactName, setContactName] = useState(props.contact.contactName)
+   const [number, setNumber] = useState(props.contact.number)
+	const [id, setId] = useState(props.contact.id)
+	const {changeContact} = useActions()
 	const submit = () => {
-		addContact({id,contactName, number})
+		changeContact({id, contactName, number})
 
 	}
 	
@@ -23,7 +23,7 @@ const ContactForm: FC = () => {
 			name="contact name"
 			rules={[rules.required('Please input contact name!')]}
 		>
-			<Input value={contactName}
+			<Input value={props.contact.contactName}
                   onChange={e => setContactName(e.target.value)} />
 		</Form.Item>
 
@@ -32,7 +32,7 @@ const ContactForm: FC = () => {
 			name="number"
 			rules={[rules.required('Please input number!')]}
 		>
-			<Input value={number}
+			<Input value={props.contact.number}
                   onChange={e => setNumber(e.target.value)} type={"text"}/>
 		</Form.Item>
 		<Form.Item>
@@ -44,4 +44,4 @@ const ContactForm: FC = () => {
 	)
 }
 
-export default ContactForm;
+export default ChangeForm;

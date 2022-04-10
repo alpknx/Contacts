@@ -1,30 +1,28 @@
-import { Avatar, Button, Col, List, Modal, Row } from 'antd';
-import React, { FC, useContext, useState } from 'react';
-import { ContactsActionCreators } from '../../Redux/contacts/action-creators';
-import ContactsReducer from '../../Redux/contacts/contacts-reducer';
-import { ContactsState } from '../../Redux/contacts/contacts-types';
+import { Avatar, Button, List, Modal } from 'antd';
+import { FC, useState } from 'react';
+import { ContactsState} from '../../Redux/contacts/contacts-types';
 import { useActions } from '../hooks/useActions';
-import { IContact } from '../models/IContact';
-import ContactForm from './ContactForm';
 import '../../App.css'
+import ChangeForm from './ChangeForm';
+import { IContact } from '../models/IContact';
 
 const ContactsList: FC<ContactsState> = (props) => {
 
 	const [modalVisible, setModalVisible] = useState(false)
-	const [contactName, setContactName] = useState('')
-   const [number, setNumber] = useState('')
-	const {deleteContact} = useActions() 
-	const {changeContact} = useActions() 
-	const deleteSubmit = () => {
-		deleteContact({contactName, number})
-	}
+	const [contact, setContact] = useState<IContact>({
+		id: 0,
+		contactName: '',
+		number: ''
+	} as IContact);
+	const {deleteContact} = useActions()
+	
 	return (
 		<List
 		itemLayout="horizontal"
 		dataSource={props.contacts}
 		renderItem={item => (
 				<List.Item className='contacts-item'>
-					<List.Item.Meta
+					<List.Item.Meta key={item.id}
 						avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
 						title={<a href="https://ant.design">{item.contactName}</a>}/>
 					<List.Item.Meta
@@ -33,7 +31,7 @@ const ContactsList: FC<ContactsState> = (props) => {
 						Change Contact
 					</Button>
 					<Modal title="change Contact" visible={modalVisible} footer={null} onCancel={()=> setModalVisible(false)}>
-						<ContactForm/>
+						<ChangeForm contact={item} contacts={props.contacts}/>
 					</Modal>
 					<Button onClick={()=> deleteContact(item)}>
 						Delete Contact
