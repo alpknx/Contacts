@@ -1,4 +1,3 @@
-import ContactForm from "../../components/Contacts/ContactForm";
 import { IContact } from "../../components/models/IContact";
 import { AddContactAction, ChangeContactAction, ContactActionEnum,DeleteContactAction, setContactAction } from "./contacts-types";
 

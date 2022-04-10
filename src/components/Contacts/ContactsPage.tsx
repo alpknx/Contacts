@@ -3,7 +3,8 @@ import React from 'react';
 import { FC, useState } from 'react'
 import { useTypesSelector } from '../hooks/useTypesSelector';
 import ContactForm from './ContactForm';
-import ContactsList from './ContactsList';
+import ContactsList from './ContactsLIst';
+
 
 const ContactsPage: FC = () => {
 	const contacts = useTypesSelector(state => state.contacts.contacts);
